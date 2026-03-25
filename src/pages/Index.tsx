@@ -7,11 +7,11 @@ export default function Index() {
       <header className="header">
         <div className="logo">НАБЕРЕЖНАЯ ДОБРА</div>
         <nav>
-          <a href="#">Меню</a>
-          <a href="#">Стажёрам</a>
-          <a href="#">Вакансии</a>
-          <a href="#">О нас</a>
-          <a href="#">Контакты</a>
+          <a href="#menu">Меню</a>
+          <a href="#stazheram">Стажёрам</a>
+          <a href="#vacancies">Вакансии</a>
+          <a href="#about">О нас</a>
+          <a href="#contacts">Контакты</a>
         </nav>
       </header>
 
@@ -29,9 +29,9 @@ export default function Index() {
               Домашняя кухня и своя пекарня во Владивостоке. Каждый обед здесь — это чей-то первый рабочий опыт. Средний чек 850 ₽.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-              <button className="btn-cta" style={{ background: "var(--primary)", color: "white", borderColor: "var(--primary)" }}>
+              <a href="#menu" className="btn-cta" style={{ background: "var(--primary)", color: "white", borderColor: "var(--primary)", textDecoration: "none" }}>
                 Смотреть меню
-              </button>
+              </a>
               <button className="btn-cta" style={{ background: "white" }}>
                 О нас
               </button>
@@ -238,6 +238,33 @@ export default function Index() {
             <div className="social-item">
               <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Атмосфера кафе" />
             </div>
+          </div>
+        </section>
+
+        <section className="section-padding" id="vacancies" style={{ background: "#f5f0e8", borderTop: "3px solid #1a1a1a" }}>
+          <h2 className="section-title" style={{ marginBottom: "16px", textAlign: "center" }}>ВАКАНСИИ</h2>
+          <p style={{ textAlign: "center", color: "#555", marginBottom: "48px", fontSize: "16px", maxWidth: "600px", margin: "0 auto 48px" }}>
+            Расскажите, какие вакансии у вас есть — и я оформлю их красиво здесь.
+          </p>
+
+          <div style={{ display: "grid", gap: "24px", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
+            {[
+              { title: "Повар", type: "Полная занятость", desc: "Готовим домашние блюда по проверенным рецептам. Опыт от 1 года, работа в тёплом коллективе." },
+              { title: "Пекарь", type: "Полная занятость", desc: "Выпечка круассанов, булочек и пирожков каждое утро. Обучим с нуля, если есть желание." },
+              { title: "Бариста", type: "Гибкий график", desc: "Зерновой кофе, авторские напитки. Оплачиваем обучение, ценим ответственность и улыбку." },
+              { title: "Кассир / администратор", type: "Полная занятость", desc: "Встречаем гостей, принимаем заказы, помогаем с выбором. Главное — доброжелательность." },
+            ].map((v) => (
+              <div key={v.title} style={{ background: "white", border: "3px solid #1a1a1a", padding: "28px", boxShadow: "6px 6px 0 #1a1a1a" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", gap: "12px", flexWrap: "wrap" }}>
+                  <h3 style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "18px", fontWeight: 800 }}>{v.title}</h3>
+                  <span style={{ background: "#8b1a1a", color: "white", padding: "4px 12px", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", whiteSpace: "nowrap" }}>{v.type}</span>
+                </div>
+                <p style={{ color: "#555", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{v.desc}</p>
+                <button className="btn-cta" style={{ background: "var(--dark)", color: "white", borderColor: "var(--dark)", width: "100%", fontSize: "13px" }}>
+                  Откликнуться
+                </button>
+              </div>
+            ))}
           </div>
         </section>
       </main>
