@@ -1,4 +1,125 @@
+import { useState } from "react";
+
+const menuData = {
+  "🍲 СУПЫ": [
+    { name: "Суп куриный с лапшой (домашний)", weight: "320 г", price: "250 ₽" },
+    { name: "Борщ с говядиной и сметаной", weight: "350 г", price: "320 ₽" },
+    { name: "Суп рыбный с лососем и укропом", weight: "320 г", price: "290 ₽" },
+    { name: "Суп-пюре из тыквы с семечками", weight: "300 г", price: "220 ₽" },
+  ],
+  "🍽 ВТОРОЕ": [
+    { name: "Картофельное пюре с котлетой по-домашнему", weight: "300 г", price: "350 ₽" },
+    { name: "Гречка с печенью по-строгановски", weight: "280 г", price: "380 ₽" },
+    { name: "Паста с курицей в сливочном соусе", weight: "320 г", price: "420 ₽" },
+    { name: "Рис с запечённым лососем и овощами", weight: "280 г", price: "550 ₽" },
+    { name: "Треска, запечённая с лимонником и сливочным маслом", weight: "270 г", price: "530 ₽" },
+  ],
+  "🥗 САЛАТЫ": [
+    { name: "Цезарь с курицей и сухариками", weight: "180 г", price: "380 ₽" },
+    { name: "Салат с тунцом, яйцом и свежими огурцами", weight: "170 г", price: "420 ₽" },
+    { name: "Греческий с фетой и оливками", weight: "200 г", price: "350 ₽" },
+    { name: "Салат из сезонных овощей с домашней заправкой", weight: "150 г", price: "250 ₽" },
+    { name: "Салат с кальмаром и авокадо", weight: "180 г", price: "450 ₽" },
+  ],
+  "🥐 ВЫПЕЧКА": [
+    { name: "Круассан классический", weight: "70 г", price: "150 ₽" },
+    { name: "Круассан с шоколадом", weight: "80 г", price: "180 ₽" },
+    { name: "Пирожок с картошкой и грибами", weight: "100 г", price: "120 ₽" },
+    { name: "Пирожок с капустой", weight: "100 г", price: "100 ₽" },
+    { name: "Булочка с корицей (синабон)", weight: "90 г", price: "180 ₽" },
+    { name: "Блины с творогом и сметаной", weight: "120 г", price: "220 ₽" },
+    { name: "Блины с мёдом", weight: "110 г", price: "200 ₽" },
+    { name: "Бриошь с камчатским крабом и авокадо", weight: "110 г", price: "380 ₽" },
+  ],
+  "☕ НАПИТКИ": [
+    { name: "Американо", weight: "200 мл", price: "150 ₽" },
+    { name: "Капучино", weight: "200 мл", price: "180 ₽" },
+    { name: "Латте", weight: "250 мл", price: "190 ₽" },
+    { name: "Раф", weight: "220 мл", price: "210 ₽" },
+    { name: "Кофе с корицей или сиропом (добавка)", weight: "—", price: "+30 ₽" },
+    { name: "Чай чёрный / зелёный", weight: "300 мл", price: "100 ₽" },
+    { name: "Какао", weight: "200 мл", price: "160 ₽" },
+    { name: "Авторский лимонад (домашний)", weight: "300 мл", price: "220 ₽" },
+    { name: "Морс клюквенный", weight: "250 мл", price: "180 ₽" },
+  ],
+  "🍰 ДЕСЕРТЫ": [
+    { name: "Медовик (домашний)", weight: "120 г", price: "280 ₽" },
+    { name: "Чизкейк классический", weight: "130 г", price: "290 ₽" },
+    { name: "Наполеон", weight: "130 г", price: "300 ₽" },
+    { name: "Панкейки с фруктами и мёдом", weight: "150 г", price: "350 ₽" },
+    { name: "Жареное мороженое", weight: "120 г", price: "290 ₽" },
+    { name: "Десерт дня (от пекаря)", weight: "100–120 г", price: "200–250 ₽" },
+  ],
+  "⭐ КОМБО": [
+    { name: "Бизнес-ланч", desc: "Суп + второе + салат + компот/чай", weight: "900–1100 г", price: "550–650 ₽" },
+    { name: "Обед + кофе", desc: "Бизнес-ланч + капучино/латте", weight: "1100–1350 г + 200–250 мл", price: "750–850 ₽" },
+    { name: "Кофе + десерт", desc: "Любой кофе + десерт на выбор", weight: "200–250 мл + 90–130 г", price: "350–450 ₽" },
+    { name: "Семейный завтрак", desc: "Блины + круассан + 2 кофе + морс", weight: "830–900 г + напитки", price: "890 ₽" },
+  ],
+};
+
+const vacancies = [
+  {
+    icon: "🥐",
+    title: "ПЕКАРЬ",
+    spots: 2,
+    salary: "55 000",
+    desc: "Замес теста, формовка, выпечка круассанов, булочек, пирожков. Работа с наставником.",
+    schedule: "5 дней в неделю, утренняя смена",
+    requirements: "Опыт не обязателен — обучаем с нуля",
+  },
+  {
+    icon: "🍳",
+    title: "ПОВАР",
+    spots: 2,
+    salary: "60 000",
+    desc: "Приготовление блюд домашней кухни по рецептурам. Работа в дружном коллективе.",
+    schedule: "5 дней в неделю, сменный график",
+    requirements: "Опыт от 1 года, санитарная книжка",
+  },
+  {
+    icon: "🍴",
+    title: "ОФИЦИАНТ",
+    spots: 2,
+    salary: "40 000",
+    desc: "Обслуживание гостей, приём заказов, поддержание уюта в зале. Чаевые сверху.",
+    schedule: "Гибкий график, сменная работа",
+    requirements: "Доброжелательность и желание работать",
+  },
+  {
+    icon: "📋",
+    title: "АДМИНИСТРАТОР",
+    spots: 1,
+    salary: "60 000",
+    desc: "Координация работы кафе, встреча гостей, работа с кассой и бронированием.",
+    schedule: "5 дней в неделю",
+    requirements: "Опыт в сфере обслуживания от 1 года",
+  },
+  {
+    icon: "🌱",
+    title: "СТАЖЁР (ОПЛАЧИВАЕМАЯ СТАЖИРОВКА)",
+    spots: 4,
+    salary: "20 000",
+    desc: "Помощь на кухне и в зале. Для подростков, выпускников детских домов и людей с ОВЗ. Наставник всегда рядом.",
+    schedule: "Сокращённый день до 4 часов, гибкий график",
+    requirements: "Желание учиться. Опыт не нужен",
+  },
+  {
+    icon: "🧹",
+    title: "УБОРЩИК",
+    spots: 1,
+    salary: "35 000",
+    desc: "Поддержание чистоты в зале, на кухне и в подсобных помещениях.",
+    schedule: "Утренняя смена, 5 дней в неделю",
+    requirements: "Ответственность и аккуратность",
+  },
+];
+
 export default function Index() {
+  const tabs = Object.keys(menuData);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [openVacancy, setOpenVacancy] = useState<string | null>(null);
+  const isCombo = activeTab === "⭐ КОМБО";
 
   return (
     <>
@@ -32,9 +153,7 @@ export default function Index() {
               <a href="#menu" className="btn-cta" style={{ background: "var(--primary)", color: "white", borderColor: "var(--primary)", textDecoration: "none" }}>
                 Смотреть меню
               </a>
-              <button className="btn-cta" style={{ background: "white" }}>
-                О нас
-              </button>
+              <button className="btn-cta" style={{ background: "white" }}>О нас</button>
             </div>
           </div>
           <div className="hero-img" style={{ overflow: "hidden", padding: 0 }}>
@@ -44,38 +163,12 @@ export default function Index() {
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
             <div className="sticker" style={{ background: "#4a9fd5", color: "white", border: "none", boxShadow: "none" }}>
-              ОБЕД
-              <br />
-              ОТ 850 ₽
+              ОБЕД<br />ОТ 850 ₽
             </div>
-            <div style={{
-              position: "absolute",
-              top: "20%",
-              left: "8%",
-              background: "white",
-              color: "#1a1a1a",
-              padding: "8px 18px",
-              borderRadius: "999px",
-              fontWeight: 700,
-              fontSize: "14px",
-              border: "2px solid #1a1a1a",
-              letterSpacing: "0.5px"
-            }}>
+            <div style={{ position: "absolute", top: "20%", left: "8%", background: "white", color: "#1a1a1a", padding: "8px 18px", borderRadius: "999px", fontWeight: 700, fontSize: "14px", border: "2px solid #1a1a1a" }}>
               #ДОБРОЕДЕЛО
             </div>
-            <div style={{
-              position: "absolute",
-              bottom: "32%",
-              right: "8%",
-              background: "white",
-              color: "#1a1a1a",
-              padding: "8px 18px",
-              borderRadius: "999px",
-              fontWeight: 700,
-              fontSize: "14px",
-              border: "2px solid #1a1a1a",
-              letterSpacing: "0.5px"
-            }}>
+            <div style={{ position: "absolute", bottom: "32%", right: "8%", background: "white", color: "#1a1a1a", padding: "8px 18px", borderRadius: "999px", fontWeight: 700, fontSize: "14px", border: "2px solid #1a1a1a" }}>
               ТЕПЛО
             </div>
           </div>
@@ -87,141 +180,124 @@ export default function Index() {
           </div>
         </div>
 
+        {/* МЕНЮ */}
         <section className="section-padding" id="menu">
-          <h2 className="section-title" style={{ marginBottom: "48px", textAlign: "center" }}>МЕНЮ</h2>
+          <h2 className="section-title" style={{ marginBottom: "32px" }}>МЕНЮ</h2>
 
-          {[
-            {
-              title: "СУПЫ",
-              items: [
-                { name: "Суп куриный с лапшой (домашний)", weight: "320 г", price: "250 ₽" },
-                { name: "Борщ с говядиной и сметаной", weight: "350 г", price: "320 ₽" },
-                { name: "Суп рыбный с лососем и укропом", weight: "320 г", price: "290 ₽" },
-                { name: "Суп-пюре из тыквы с семечками", weight: "300 г", price: "220 ₽" },
-              ],
-            },
-            {
-              title: "ВТОРЫЕ БЛЮДА",
-              items: [
-                { name: "Картофельное пюре с котлетой по-домашнему", weight: "300 г", price: "350 ₽" },
-                { name: "Гречка с печенью по-строгановски", weight: "280 г", price: "380 ₽" },
-                { name: "Паста с курицей в сливочном соусе", weight: "320 г", price: "420 ₽" },
-                { name: "Рис с запечённым лососем и овощами", weight: "280 г", price: "550 ₽" },
-                { name: "Треска, запечённая с лимонником и сливочным маслом", weight: "270 г", price: "530 ₽" },
-              ],
-            },
-            {
-              title: "САЛАТЫ",
-              items: [
-                { name: "Цезарь с курицей и сухариками", weight: "180 г", price: "380 ₽" },
-                { name: "Салат с тунцом, яйцом и свежими огурцами", weight: "170 г", price: "420 ₽" },
-                { name: "Греческий с фетой и оливками", weight: "200 г", price: "350 ₽" },
-                { name: "Салат из сезонных овощей с домашней заправкой", weight: "150 г", price: "250 ₽" },
-                { name: "Салат с кальмаром и авокадо", weight: "180 г", price: "450 ₽" },
-              ],
-            },
-            {
-              title: "ВЫПЕЧКА",
-              items: [
-                { name: "Круассан классический", weight: "70 г", price: "150 ₽" },
-                { name: "Круассан с шоколадом", weight: "80 г", price: "180 ₽" },
-                { name: "Пирожок с картошкой и грибами", weight: "100 г", price: "120 ₽" },
-                { name: "Пирожок с капустой", weight: "100 г", price: "100 ₽" },
-                { name: "Булочка с корицей (синабон)", weight: "90 г", price: "180 ₽" },
-                { name: "Блины с творогом и сметаной", weight: "120 г", price: "220 ₽" },
-                { name: "Блины с мёдом", weight: "110 г", price: "200 ₽" },
-                { name: "Бриошь с камчатским крабом и авокадо", weight: "110 г", price: "380 ₽" },
-              ],
-            },
-            {
-              title: "ДЕСЕРТЫ",
-              items: [
-                { name: "Медовик (домашний)", weight: "120 г", price: "280 ₽" },
-                { name: "Чизкейк классический", weight: "130 г", price: "290 ₽" },
-                { name: "Наполеон", weight: "130 г", price: "300 ₽" },
-                { name: "Панкейки с фруктами и мёдом", weight: "150 г", price: "350 ₽" },
-                { name: "Жареное мороженое", weight: "120 г", price: "290 ₽" },
-                { name: "Десерт дня (от пекаря)", weight: "100–120 г", price: "200–250 ₽" },
-              ],
-            },
-            {
-              title: "НАПИТКИ",
-              items: [
-                { name: "Американо", weight: "200 мл", price: "150 ₽" },
-                { name: "Капучино", weight: "200 мл", price: "180 ₽" },
-                { name: "Латте", weight: "250 мл", price: "190 ₽" },
-                { name: "Раф", weight: "220 мл", price: "210 ₽" },
-                { name: "Кофе с корицей или сиропом (добавка)", weight: "—", price: "+30 ₽" },
-                { name: "Чай чёрный / зелёный", weight: "300 мл", price: "100 ₽" },
-                { name: "Какао", weight: "200 мл", price: "160 ₽" },
-                { name: "Авторский лимонад (домашний)", weight: "300 мл", price: "220 ₽" },
-                { name: "Морс клюквенный", weight: "250 мл", price: "180 ₽" },
-              ],
-            },
-          ].map((category) => (
-            <div key={category.title} style={{ marginBottom: "48px" }}>
-              <h3 style={{
-                fontFamily: "'Unbounded', sans-serif",
-                fontSize: "20px",
-                fontWeight: 800,
-                textTransform: "uppercase",
-                borderBottom: "3px solid #1a1a1a",
-                paddingBottom: "12px",
-                marginBottom: "0",
-                letterSpacing: "1px",
-              }}>{category.title}</h3>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr style={{ background: "#f5f0e8" }}>
-                    <th style={{ padding: "12px 16px", textAlign: "left", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", borderBottom: "2px solid #1a1a1a" }}>Блюдо</th>
-                    <th style={{ padding: "12px 16px", textAlign: "center", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", borderBottom: "2px solid #1a1a1a", whiteSpace: "nowrap" }}>Вес / объём</th>
-                    <th style={{ padding: "12px 16px", textAlign: "right", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", borderBottom: "2px solid #1a1a1a", whiteSpace: "nowrap" }}>Цена</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {category.items.map((item, i) => (
-                    <tr key={item.name} style={{ background: i % 2 === 0 ? "white" : "#fdf9f0", borderBottom: "1px solid #e8e0d0" }}>
-                      <td style={{ padding: "14px 16px", fontSize: "15px", fontWeight: 500 }}>{item.name}</td>
-                      <td style={{ padding: "14px 16px", fontSize: "14px", color: "#666", textAlign: "center", whiteSpace: "nowrap" }}>{item.weight}</td>
-                      <td style={{ padding: "14px 16px", fontSize: "16px", fontWeight: 800, color: "var(--primary)", textAlign: "right", whiteSpace: "nowrap" }}>{item.price}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ))}
+          {/* Табы */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "24px" }}>
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
+              const isComboTab = tab === "⭐ КОМБО";
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  style={{
+                    padding: "10px 18px",
+                    border: "3px solid #1a1a1a",
+                    fontWeight: 800,
+                    fontSize: "13px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.5px",
+                    cursor: "pointer",
+                    background: isActive ? (isComboTab ? "#8b1a1a" : "#1a1a1a") : "white",
+                    color: isActive ? "white" : "#1a1a1a",
+                    boxShadow: isActive ? "4px 4px 0 #8b1a1a" : "none",
+                    transition: "all 0.15s",
+                  }}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
 
-          <div style={{ marginTop: "48px", padding: "24px", background: "#f5f0e8", border: "3px solid #1a1a1a" }}>
-            <h3 style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "18px", fontWeight: 800, marginBottom: "20px", textTransform: "uppercase" }}>КОМБО-ПРЕДЛОЖЕНИЯ</h3>
+          {/* Таблица */}
+          <div style={{ border: "3px solid #1a1a1a", overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr>
-                  <th style={{ padding: "10px 16px", textAlign: "left", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", borderBottom: "2px solid #1a1a1a" }}>Комбо</th>
-                  <th style={{ padding: "10px 16px", textAlign: "left", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", borderBottom: "2px solid #1a1a1a" }}>Состав</th>
-                  <th style={{ padding: "10px 16px", textAlign: "center", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", borderBottom: "2px solid #1a1a1a", whiteSpace: "nowrap" }}>Вес / объём</th>
-                  <th style={{ padding: "10px 16px", textAlign: "right", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", borderBottom: "2px solid #1a1a1a", whiteSpace: "nowrap" }}>Цена</th>
+                <tr style={{ background: "#1a1a1a", color: "white" }}>
+                  <th style={{ padding: "14px 20px", textAlign: "left", fontSize: "13px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px" }}>Блюдо</th>
+                  {!isCombo && <th style={{ padding: "14px 16px", textAlign: "center", fontSize: "13px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", whiteSpace: "nowrap" }}>Вес / объём</th>}
+                  <th style={{ padding: "14px 20px", textAlign: "right", fontSize: "13px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", whiteSpace: "nowrap" }}>Цена</th>
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { name: "Бизнес-ланч", desc: "Суп + второе + салат + компот/чай", weight: "900–1100 г", price: "550–650 ₽" },
-                  { name: "Обед + кофе", desc: "Бизнес-ланч + капучино/латте", weight: "1100–1350 г + 200–250 мл", price: "750–850 ₽" },
-                  { name: "Кофе + десерт", desc: "Любой кофе + десерт на выбор", weight: "200–250 мл + 90–130 г", price: "350–450 ₽" },
-                  { name: "Семейный завтрак", desc: "Блины + круассан + 2 кофе + морс", weight: "830–900 г + напитки", price: "890 ₽" },
-                ].map((combo, i) => (
-                  <tr key={combo.name} style={{ borderBottom: "1px solid #d8d0c0", background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.5)" }}>
-                    <td style={{ padding: "12px 16px", fontWeight: 800, fontSize: "15px" }}>{combo.name}</td>
-                    <td style={{ padding: "12px 16px", fontSize: "14px", color: "#555" }}>{combo.desc}</td>
-                    <td style={{ padding: "12px 16px", fontSize: "13px", color: "#666", textAlign: "center", whiteSpace: "nowrap" }}>{combo.weight}</td>
-                    <td style={{ padding: "12px 16px", fontSize: "16px", fontWeight: 800, color: "var(--primary)", textAlign: "right", whiteSpace: "nowrap" }}>{combo.price}</td>
+                {(menuData[activeTab as keyof typeof menuData] as Array<{ name: string; desc?: string; weight: string; price: string }>).map((item, i) => (
+                  <tr key={item.name} style={{ borderBottom: "1px solid #e0d8cc", background: i % 2 === 0 ? "white" : "#fdf9f0" }}>
+                    <td style={{ padding: "16px 20px" }}>
+                      <div style={{ fontWeight: 600, fontSize: "15px" }}>{item.name}</div>
+                      {item.desc && <div style={{ fontSize: "13px", color: "#888", marginTop: "2px" }}>{item.desc}</div>}
+                    </td>
+                    {!isCombo && <td style={{ padding: "16px", textAlign: "center", fontSize: "14px", color: "#666", whiteSpace: "nowrap" }}>{item.weight}</td>}
+                    <td style={{ padding: "16px 20px", textAlign: "right", fontSize: "16px", fontWeight: 800, color: "#8b1a1a", whiteSpace: "nowrap" }}>{item.price}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {isCombo && (
+            <div style={{ marginTop: "12px", display: "flex", alignItems: "center", gap: "8px", color: "#555", fontSize: "14px", fontWeight: 600 }}>
+              <span>⭐</span>
+              <span>БИЗНЕС-ЛАНЧ ДОСТУПЕН С 11:00 ДО 15:00</span>
+            </div>
+          )}
         </section>
 
-        <section className="section-padding">
+        {/* ВАКАНСИИ */}
+        <section className="section-padding" id="vacancies" style={{ borderTop: "3px solid #1a1a1a" }}>
+          <h2 className="section-title" style={{ marginBottom: "40px" }}>ВАКАНСИИ</h2>
+
+          <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
+            {vacancies.map((v) => {
+              const isOpen = openVacancy === v.title;
+              return (
+                <div key={v.title} style={{ border: "3px solid #1a1a1a", background: "white", padding: "24px", boxShadow: "6px 6px 0 #1a1a1a" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
+                    <span style={{ fontSize: "32px" }}>{v.icon}</span>
+                    <span style={{ background: "#1a1a1a", color: "white", padding: "4px 10px", fontSize: "12px", fontWeight: 700 }}>
+                      {v.spots} {v.spots === 1 ? "место" : "места"}
+                    </span>
+                  </div>
+                  <div style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "15px", fontWeight: 800, marginBottom: "6px", textTransform: "uppercase" }}>{v.title}</div>
+                  <div style={{ fontSize: "22px", fontWeight: 800, color: "#8b1a1a", marginBottom: "12px" }}>
+                    {v.salary} ₽ <span style={{ fontSize: "14px", fontWeight: 600, color: "#888" }}>/мес</span>
+                  </div>
+
+                  {isOpen ? (
+                    <div>
+                      <p style={{ fontSize: "14px", color: "#444", lineHeight: 1.6, marginBottom: "10px" }}>{v.desc}</p>
+                      <p style={{ fontSize: "13px", color: "#555", marginBottom: "4px" }}>
+                        <span style={{ fontWeight: 700 }}>📅 График:</span> {v.schedule}
+                      </p>
+                      <p style={{ fontSize: "13px", color: "#555", marginBottom: "16px" }}>
+                        <span style={{ fontWeight: 700 }}>✅ Требования:</span> {v.requirements}
+                      </p>
+                      <button
+                        onClick={() => setOpenVacancy(null)}
+                        style={{ background: "none", border: "none", color: "#8b1a1a", fontWeight: 800, fontSize: "13px", textTransform: "uppercase", cursor: "pointer", letterSpacing: "0.5px", padding: 0 }}
+                      >
+                        СКРЫТЬ ↑
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setOpenVacancy(v.title)}
+                      style={{ background: "none", border: "none", color: "#8b1a1a", fontWeight: 800, fontSize: "13px", textTransform: "uppercase", cursor: "pointer", letterSpacing: "0.5px", padding: 0 }}
+                    >
+                      ПОДРОБНЕЕ ↓
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ИНСТАГРАМ */}
+        <section className="section-padding" style={{ borderTop: "3px solid #1a1a1a" }}>
           <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
             @NABEREZHNAYA.DOBRA
           </h2>
@@ -240,33 +316,6 @@ export default function Index() {
             </div>
           </div>
         </section>
-
-        <section className="section-padding" id="vacancies" style={{ background: "#f5f0e8", borderTop: "3px solid #1a1a1a" }}>
-          <h2 className="section-title" style={{ marginBottom: "16px", textAlign: "center" }}>ВАКАНСИИ</h2>
-          <p style={{ textAlign: "center", color: "#555", marginBottom: "48px", fontSize: "16px", maxWidth: "600px", margin: "0 auto 48px" }}>
-            Расскажите, какие вакансии у вас есть — и я оформлю их красиво здесь.
-          </p>
-
-          <div style={{ display: "grid", gap: "24px", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
-            {[
-              { title: "Повар", type: "Полная занятость", desc: "Готовим домашние блюда по проверенным рецептам. Опыт от 1 года, работа в тёплом коллективе." },
-              { title: "Пекарь", type: "Полная занятость", desc: "Выпечка круассанов, булочек и пирожков каждое утро. Обучим с нуля, если есть желание." },
-              { title: "Бариста", type: "Гибкий график", desc: "Зерновой кофе, авторские напитки. Оплачиваем обучение, ценим ответственность и улыбку." },
-              { title: "Кассир / администратор", type: "Полная занятость", desc: "Встречаем гостей, принимаем заказы, помогаем с выбором. Главное — доброжелательность." },
-            ].map((v) => (
-              <div key={v.title} style={{ background: "white", border: "3px solid #1a1a1a", padding: "28px", boxShadow: "6px 6px 0 #1a1a1a" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", gap: "12px", flexWrap: "wrap" }}>
-                  <h3 style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "18px", fontWeight: 800 }}>{v.title}</h3>
-                  <span style={{ background: "#8b1a1a", color: "white", padding: "4px 12px", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", whiteSpace: "nowrap" }}>{v.type}</span>
-                </div>
-                <p style={{ color: "#555", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{v.desc}</p>
-                <button className="btn-cta" style={{ background: "var(--dark)", color: "white", borderColor: "var(--dark)", width: "100%", fontSize: "13px" }}>
-                  Откликнуться
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
       </main>
 
       <footer>
@@ -279,11 +328,10 @@ export default function Index() {
         <div className="footer-links">
           <h4>Навигация</h4>
           <ul>
-            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Меню</a></li>
-            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Стажёрам</a></li>
-            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Вакансии</a></li>
-            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>О нас</a></li>
-            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Контакты</a></li>
+            <li><a href="#menu" style={{ color: "inherit", textDecoration: "none" }}>Меню</a></li>
+            <li><a href="#vacancies" style={{ color: "inherit", textDecoration: "none" }}>Вакансии</a></li>
+            <li><a href="#stazheram" style={{ color: "inherit", textDecoration: "none" }}>Стажёрам</a></li>
+            <li><a href="#contacts" style={{ color: "inherit", textDecoration: "none" }}>Контакты</a></li>
           </ul>
         </div>
         <div className="footer-links">
@@ -292,7 +340,7 @@ export default function Index() {
             <li>Пн–Пт: 08:00 – 20:00</li>
             <li>Суб: 09:00 – 18:00</li>
             <li>Вс: 10:00 – 17:00</li>
-            <li>Обед: 12:00–15:00</li>
+            <li>Обед: 11:00–15:00</li>
           </ul>
         </div>
         <div className="footer-bottom">
