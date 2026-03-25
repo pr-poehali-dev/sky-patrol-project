@@ -18,12 +18,12 @@ export default function Index() {
         <section className="hero">
           <div className="hero-content">
             <h1 className="hero-title">
-              ЕДА КАК
+              НАБЕРЕЖНАЯ
               <br />
-              ДОМА, <span>с душой</span>
+              ДОБРА — <span>там, где сердцу тепло</span>
             </h1>
             <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 leading-relaxed text-[#555]">
-              Социальное кафе во Владивостоке. Домашние обеды, свежая выпечка из собственной пекарни и настоящий кофе. Средний чек — 850 ₽.
+              Домашняя кухня и своя пекарня во Владивостоке. Каждый обед здесь — это чей-то первый рабочий опыт. Средний чек 850 ₽.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
               <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
@@ -34,17 +34,17 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="hero-img">
-            <div className="sticker">
+          <div className="hero-img" style={{ backgroundImage: "url('https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg')" }}>
+            <div className="sticker" style={{ background: "#a8d8ea" }}>
               ОБЕД
               <br />
-              за 5 минут
+              от 850 ₽
             </div>
             <div className="floating-tag hidden md:block" style={{ top: "20%", left: "10%" }}>
-              #ДОМАШНЯЯЕДА
+              #ДОБРОЕДЕЛО
             </div>
             <div className="floating-tag hidden md:block" style={{ bottom: "30%", right: "20%" }}>
-              СВЕЖАК
+              #ТЕПЛО
             </div>
           </div>
         </section>
