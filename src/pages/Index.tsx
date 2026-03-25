@@ -12,7 +12,7 @@ export default function Index() {
           <a href="#">О нас</a>
           <a href="#">Контакты</a>
         </nav>
-        <button className="btn-cta">Бизнес-ланч</button>
+        <button className="btn-cta" style={{ background: "#8b1a1a", color: "white", borderColor: "#8b1a1a" }}>Бизнес-ланч</button>
       </header>
 
       <main>
@@ -37,7 +37,7 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="hero-img" style={{ backgroundImage: "url('https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg')" }}>
+          <div className="hero-img" style={{ backgroundImage: "url('https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
             <div className="sticker" style={{ background: "#4a9fd5", color: "white", border: "none", boxShadow: "none" }}>
               ОБЕД
               <br />
@@ -174,18 +174,7 @@ export default function Index() {
           </div>
         </section>
 
-        <section className="retro-vibe">
-          <div>
-            <h2 className="vibe-title">ЕДА С СМЫСЛОМ.</h2>
-            <p className="vibe-text">
-              «Набережная добра» — это не просто кафе. Каждый ваш обед даёт работу и шанс стажёрам: подросткам, выпускникам детских домов и людям с ОВЗ. На наших стенах — их истории. Вы видите, кому помогаете. Приходите с аппетитом, уходите с хорошим настроением.
-            </p>
-            <button className="btn-cta" style={{ background: "var(--dark)", color: "white", borderColor: "white" }}>
-              Истории стажёров
-            </button>
-          </div>
-          <div className="vibe-img"></div>
-        </section>
+
 
         <section className="section-padding">
           <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
