@@ -1,4 +1,55 @@
 export default function Index() {
+  const menuItems = [
+    {
+      tag: "Суп дня",
+      tagBg: "#8b1a1a",
+      img: "https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Борщ домашний",
+      price: "180 ₽",
+      desc: "Наваристый бульон, свекла, капуста, сметана и ароматный чёрный хлеб.",
+    },
+    {
+      tag: "Хит обеда",
+      tagBg: "#8b1a1a",
+      img: "https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Котлета с пюре",
+      price: "320 ₽",
+      desc: "Домашние котлеты из фермерской свинины, сливочное пюре, соус по-деревенски.",
+    },
+    {
+      tag: "Популярное",
+      tagBg: "#555",
+      img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Паста с курицей",
+      price: "290 ₽",
+      desc: "Спагетти с нежной куриной грудкой в сливочном соусе и пармезаном.",
+    },
+    {
+      tag: "Из пекарни",
+      tagBg: "#a0522d",
+      img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Круассан",
+      price: "180 ₽",
+      desc: "Слоёное тесто, хрустящая корочка. Свежий из печи — ветчина, сыр или джем.",
+    },
+    {
+      tag: "Пекарня",
+      tagBg: "#a0522d",
+      img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Булочка с корицей",
+      price: "150 ₽",
+      desc: "Мягкое дрожжевое тесто, корица, глазурь. Тает во рту.",
+    },
+    {
+      tag: "Напитки",
+      tagBg: "#4a4a4a",
+      img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      name: "Кофе с собой",
+      price: "190 ₽",
+      desc: "Зерновая арабика, обученные бариста. Сиропы, корица, растительное молоко.",
+    },
+  ];
+
   return (
     <>
       <div className="grain-overlay" />
@@ -12,7 +63,6 @@ export default function Index() {
           <a href="#">О нас</a>
           <a href="#">Контакты</a>
         </nav>
-        <button className="btn-cta" style={{ background: "#8b1a1a", color: "white", borderColor: "#8b1a1a" }}>Бизнес-ланч</button>
       </header>
 
       <main>
@@ -29,7 +79,7 @@ export default function Index() {
               Домашняя кухня и своя пекарня во Владивостоке. Каждый обед здесь — это чей-то первый рабочий опыт. Средний чек 850 ₽.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-              <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
+              <button className="btn-cta" style={{ background: "var(--primary)", color: "white", borderColor: "var(--primary)" }}>
                 Смотреть меню
               </button>
               <button className="btn-cta" style={{ background: "white" }}>
@@ -37,7 +87,12 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="hero-img" style={{ backgroundImage: "url('https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="hero-img" style={{ overflow: "hidden", padding: 0 }}>
+            <img
+              src="https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg"
+              alt="Выпечка в кафе"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
             <div className="sticker" style={{ background: "#4a9fd5", color: "white", border: "none", boxShadow: "none" }}>
               ОБЕД
               <br />
@@ -78,13 +133,13 @@ export default function Index() {
 
         <div className="marquee">
           <div className="marquee-content">
-            &nbsp; * ДОМАШНИЙ БОРЩ * КРУАССАНЫ ИЗ ПЕЧИ * КОФЕ ИЗ ЗЕРНА * БИЗНЕС-ЛАНЧ ЗА 5 МИНУТ * ВЛАДИВОСТОК * ДОМАШНИЙ БОРЩ * КРУАССАНЫ ИЗ ПЕЧИ * КОФЕ ИЗ ЗЕРНА * БИЗНЕС-ЛАНЧ ЗА 5 МИНУТ * ВЛАДИВОСТОК
+            &nbsp; * ДОМАШНИЙ БОРЩ * КРУАССАНЫ ИЗ ПЕЧИ * КОФЕ ИЗ ЗЕРНА * ОБЕД ЗА 5 МИНУТ * ВЛАДИВОСТОК * ДОМАШНИЙ БОРЩ * КРУАССАНЫ ИЗ ПЕЧИ * КОФЕ ИЗ ЗЕРНА * ОБЕД ЗА 5 МИНУТ * ВЛАДИВОСТОК
           </div>
         </div>
 
         <section className="section-padding">
           <div className="section-header">
-            <h2 className="section-title">МЕНЮ ДНЯ</h2>
+            <h2 className="section-title">МЕНЮ</h2>
             <a
               href="#"
               className="text-sm md:text-base"
@@ -94,87 +149,22 @@ export default function Index() {
             </a>
           </div>
 
-          <div className="menu-grid">
-            {/* Item 1 */}
-            <div className="menu-card">
-              <span className="menu-tag">Хит обеда</span>
-              <img
-                src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Котлета с пюре"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Котлета с пюре</h3>
-                  <span className="price">320 ₽</span>
+          <div className="menu-grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
+            {menuItems.map((item) => (
+              <div className="menu-card" key={item.name}>
+                <span className="menu-tag" style={{ background: item.tagBg, color: "white" }}>{item.tag}</span>
+                <img src={item.img} alt={item.name} />
+                <div className="menu-card-body">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+                    <h3>{item.name}</h3>
+                    <span className="price">{item.price}</span>
+                  </div>
+                  <p style={{ fontSize: "14px", color: "#666" }}>{item.desc}</p>
                 </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>
-                  Домашние котлеты из фермерской свинины, сливочное пюре и соус по-деревенски.
-                </p>
               </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="menu-card">
-              <span className="menu-tag" style={{ background: "var(--secondary)" }}>
-                Из пекарни
-              </span>
-              <img
-                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Круассан"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Круассан с начинкой</h3>
-                  <span className="price">180 ₽</span>
-                </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>Слоёное тесто, хрустящая корочка. Свежий из печи каждое утро — ветчина, сыр или джем.</p>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="menu-card">
-              <span className="menu-tag" style={{ background: "var(--accent)", color: "var(--dark)" }}>
-                Популярное
-              </span>
-              <img
-                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Кофе"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Кофе с собой</h3>
-                  <span className="price">190 ₽</span>
-                </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>
-                  Зерновая арабика, обученные бариста. Добавки — сиропы, корица, растительное молоко.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
-
-
 
         <section className="section-padding">
           <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
@@ -182,28 +172,16 @@ export default function Index() {
           </h2>
           <div className="social-grid">
             <div className="social-item">
-              <img
-                src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Домашняя еда"
-              />
+              <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Домашняя еда" />
             </div>
             <div className="social-item">
-              <img
-                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Кофе"
-              />
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Кофе" />
             </div>
             <div className="social-item">
-              <img
-                src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Выпечка"
-              />
+              <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Выпечка" />
             </div>
             <div className="social-item">
-              <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Атмосфера кафе"
-              />
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Атмосфера кафе" />
             </div>
           </div>
         </section>
@@ -219,26 +197,11 @@ export default function Index() {
         <div className="footer-links">
           <h4>Навигация</h4>
           <ul>
-            <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-                Меню
-              </a>
-            </li>
-            <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-                О нас
-              </a>
-            </li>
-            <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-                Миссия
-              </a>
-            </li>
-            <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-                Контакты
-              </a>
-            </li>
+            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Меню</a></li>
+            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Стажёрам</a></li>
+            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Вакансии</a></li>
+            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>О нас</a></li>
+            <li><a href="#" style={{ color: "inherit", textDecoration: "none" }}>Контакты</a></li>
           </ul>
         </div>
         <div className="footer-links">
@@ -247,7 +210,7 @@ export default function Index() {
             <li>Пн–Пт: 08:00 – 20:00</li>
             <li>Суб: 09:00 – 18:00</li>
             <li>Вс: 10:00 – 17:00</li>
-            <li>Бизнес-ланч: 12:00–15:00</li>
+            <li>Обед: 12:00–15:00</li>
           </ul>
         </div>
         <div className="footer-bottom">
