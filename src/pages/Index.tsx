@@ -4,11 +4,12 @@ export default function Index() {
       <div className="grain-overlay" />
 
       <header className="header">
-        <div className="logo">НАБЕРЕЖНАЯ<br className="block md:hidden" /> ДОБРА</div>
+        <div className="logo">НАБЕРЕЖНАЯ ДОБРА</div>
         <nav>
           <a href="#">Меню</a>
+          <a href="#">Стажёрам</a>
+          <a href="#">Вакансии</a>
           <a href="#">О нас</a>
-          <a href="#">Миссия</a>
           <a href="#">Контакты</a>
         </nav>
         <button className="btn-cta">Бизнес-ланч</button>
@@ -20,9 +21,11 @@ export default function Index() {
             <h1 className="hero-title">
               НАБЕРЕЖНАЯ
               <br />
-              ДОБРА — <span>там, где сердцу тепло</span>
+              <span style={{ color: "var(--primary)", fontFamily: "'Playfair Display', serif", fontStyle: "italic" }}>ДОБРА —</span>
+              <br />
+              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: "var(--dark)", fontSize: "0.75em" }}>там, где сердцу тепло</span>
             </h1>
-            <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 leading-relaxed text-[#555]">
+            <p className="text-base md:text-lg mb-8 md:mb-10 leading-relaxed text-[#555]">
               Домашняя кухня и своя пекарня во Владивостоке. Каждый обед здесь — это чей-то первый рабочий опыт. Средний чек 850 ₽.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
@@ -30,21 +33,45 @@ export default function Index() {
                 Смотреть меню
               </button>
               <button className="btn-cta" style={{ background: "white" }}>
-                Наша миссия
+                О нас
               </button>
             </div>
           </div>
           <div className="hero-img" style={{ backgroundImage: "url('https://cdn.poehali.dev/projects/61f11d1b-729d-444c-aa93-74962c1ea83e/files/7651426c-1991-47d0-a349-70f0d69b22a3.jpg')" }}>
-            <div className="sticker" style={{ background: "#a8d8ea" }}>
+            <div className="sticker" style={{ background: "#4a9fd5", color: "white", border: "none", boxShadow: "none" }}>
               ОБЕД
               <br />
-              от 850 ₽
+              ОТ 850 ₽
             </div>
-            <div className="floating-tag hidden md:block" style={{ top: "20%", left: "10%" }}>
+            <div style={{
+              position: "absolute",
+              top: "20%",
+              left: "8%",
+              background: "white",
+              color: "#1a1a1a",
+              padding: "8px 18px",
+              borderRadius: "999px",
+              fontWeight: 700,
+              fontSize: "14px",
+              border: "2px solid #1a1a1a",
+              letterSpacing: "0.5px"
+            }}>
               #ДОБРОЕДЕЛО
             </div>
-            <div className="floating-tag hidden md:block" style={{ bottom: "30%", right: "20%" }}>
-              #ТЕПЛО
+            <div style={{
+              position: "absolute",
+              bottom: "32%",
+              right: "8%",
+              background: "white",
+              color: "#1a1a1a",
+              padding: "8px 18px",
+              borderRadius: "999px",
+              fontWeight: 700,
+              fontSize: "14px",
+              border: "2px solid #1a1a1a",
+              letterSpacing: "0.5px"
+            }}>
+              ТЕПЛО
             </div>
           </div>
         </section>
