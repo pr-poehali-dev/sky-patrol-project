@@ -121,6 +121,26 @@ export default function Index() {
   const [openVacancy, setOpenVacancy] = useState<string | null>(null);
   const isCombo = activeTab === "⭐ КОМБО";
 
+  const [form, setForm] = useState({ name: "", phone: "", vacancy: "", category: "", comment: "" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!form.name || !form.phone || !form.vacancy) return;
+    setSending(true);
+    try {
+      await fetch("https://functions.poehali.dev/0478e869-d2fd-44af-83aa-71ed1f035159", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      setSent(true);
+      setForm({ name: "", phone: "", vacancy: "", category: "", comment: "" });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <>
       <div className="grain-overlay" />
@@ -128,10 +148,8 @@ export default function Index() {
       <header className="header">
         <div className="logo">НАБЕРЕЖНАЯ ДОБРА</div>
         <nav>
-          <a href="#menu">Меню</a>
           <a href="#stazheram">Стажёрам</a>
           <a href="#vacancies">Вакансии</a>
-          <a href="#about">О нас</a>
           <a href="#contacts">Контакты</a>
         </nav>
       </header>
@@ -299,23 +317,25 @@ export default function Index() {
         {/* О НАС */}
         <section className="section-padding" id="about" style={{ borderTop: "3px solid #1a1a1a" }}>
           <h2 className="section-title" style={{ marginBottom: "40px" }}>О НАС</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", border: "3px solid #1a1a1a" }}>
-            {[
-              { icon: "☕", title: "КТО МЫ", text: "«Набережная добра» — социальное кафе во Владивостоке с домашней кухней и собственной пекарней. Мы готовим обеды (супы, вторые блюда, салаты), печём круассаны, пирожки, булочки с корицей, блины и варим качественный кофе." },
-              { icon: "❤️", title: "НАША МИССИЯ", text: "Дать первый рабочий опыт тем, кому сложно начать. Мы трудоустраиваем выпускников детских домов, людей с инвалидностью и подростков 14–18 лет. В Приморском крае сотни людей не могут найти работу из-за отсутствия опыта — мы ломаем этот замкнутый круг." },
-              { icon: "🎓", title: "КАК ЭТО РАБОТАЕТ", text: "Каждый стажёр закреплён за наставником — опытным пекарем, поваром или администратором. Обучение проходит в реальном процессе: выпечка, приготовление блюд, работа с кассой, обслуживание гостей. После — запись в трудовой книжке." },
-              { icon: "⭐", title: "ПОЧЕМУ ВЫБИРАЮТ НАС", text: "Мы — единственное кафе во Владивостоке, которое совмещает домашнюю кухню, пекарню, кофе и системное трудоустройство трёх уязвимых групп. Приходя к нам, вы не просто обедаете — вы становитесь частью доброго дела." },
-            ].map((card, i) => (
-              <div key={card.title} style={{
-                padding: "32px",
-                borderRight: i % 2 === 0 ? "3px solid #1a1a1a" : "none",
-                borderBottom: i < 2 ? "3px solid #1a1a1a" : "none",
-              }}>
-                <div style={{ fontSize: "36px", marginBottom: "16px" }}>{card.icon}</div>
-                <div style={{ fontWeight: 800, fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "12px" }}>{card.title}</div>
-                <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#444" }}>{card.text}</p>
-              </div>
-            ))}
+          <div style={{ border: "3px solid #1a1a1a" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "3px solid #1a1a1a" }}>
+              {[
+                { icon: "☕", title: "КТО МЫ", text: "«Набережная добра» — социальное кафе во Владивостоке с домашней кухней и собственной пекарней. Мы готовим обеды (супы, вторые блюда, салаты), печём круассаны, пирожки, булочки с корицей, блины и варим качественный кофе." },
+                { icon: "❤️", title: "НАША МИССИЯ", text: "Дать первый рабочий опыт тем, кому сложно начать. Мы трудоустраиваем выпускников детских домов, людей с инвалидностью и подростков 14–18 лет. В Приморском крае сотни людей не могут найти работу из-за отсутствия опыта — мы ломаем этот замкнутый круг." },
+                { icon: "🎓", title: "КАК ЭТО РАБОТАЕТ", text: "Каждый стажёр закреплён за наставником — опытным пекарем, поваром или администратором. Обучение проходит в реальном процессе: выпечка, приготовление блюд, работа с кассой, обслуживание гостей. После — запись в трудовой книжке." },
+              ].map((card, i) => (
+                <div key={card.title} style={{ padding: "32px", borderRight: i < 2 ? "3px solid #1a1a1a" : "none" }}>
+                  <div style={{ fontSize: "36px", marginBottom: "16px" }}>{card.icon}</div>
+                  <div style={{ fontWeight: 800, fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "12px" }}>{card.title}</div>
+                  <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#444" }}>{card.text}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ padding: "32px", maxWidth: "400px" }}>
+              <div style={{ fontSize: "36px", marginBottom: "16px" }}>⭐</div>
+              <div style={{ fontWeight: 800, fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "12px" }}>ПОЧЕМУ ВЫБИРАЮТ НАС</div>
+              <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#444" }}>Мы — единственное кафе во Владивостоке, которое совмещает домашнюю кухню, пекарню, кофе и системное трудоустройство трёх уязвимых групп. Приходя к нам, вы не просто обедаете — вы становитесь частью доброго дела.</p>
+            </div>
           </div>
         </section>
 
@@ -347,18 +367,25 @@ export default function Index() {
             </div>
 
             <div style={{ background: "white", border: "3px solid #1a1a1a", padding: "32px", boxShadow: "6px 6px 0 #1a1a1a" }}>
+              {sent ? (
+                <div style={{ textAlign: "center", padding: "40px 20px" }}>
+                  <div style={{ fontSize: "48px", marginBottom: "16px" }}>✅</div>
+                  <div style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "18px", fontWeight: 800, marginBottom: "12px" }}>ЗАЯВКА ОТПРАВЛЕНА!</div>
+                  <p style={{ color: "#555", fontSize: "15px" }}>Мы свяжемся с вами в ближайшее время.</p>
+                </div>
+              ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>ВАШЕ ИМЯ *</label>
-                  <input type="text" placeholder="Иван Иванов" style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
+                  <input type="text" placeholder="Иван Иванов" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
                 </div>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>НОМЕР ТЕЛЕФОНА *</label>
-                  <input type="tel" placeholder="+7 ___ ___-__-__" style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
+                  <input type="tel" placeholder="+7 ___ ___-__-__" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
                 </div>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>ЖЕЛАЕМАЯ ВАКАНСИЯ *</label>
-                  <select style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
+                  <select value={form.vacancy} onChange={e => setForm(f => ({...f, vacancy: e.target.value}))} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
                     <option value="">Выберите вакансию...</option>
                     <option>Пекарь</option>
                     <option>Повар</option>
@@ -370,7 +397,7 @@ export default function Index() {
                 </div>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>КАТЕГОРИЯ (НЕОБЯЗАТЕЛЬНО)</label>
-                  <select style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
+                  <select value={form.category} onChange={e => setForm(f => ({...f, category: e.target.value}))} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
                     <option value="">Выберите категорию...</option>
                     <option>Подросток 14–18 лет</option>
                     <option>Выпускник детского дома</option>
@@ -380,13 +407,14 @@ export default function Index() {
                 </div>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>КОММЕНТАРИЙ (НЕОБЯЗАТЕЛЬНО)</label>
-                  <textarea placeholder="Расскажите о себе, удобном графике или пожеланиях..." rows={4} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", resize: "vertical" }} />
+                  <textarea placeholder="Расскажите о себе, удобном графике или пожеланиях..." rows={4} value={form.comment} onChange={e => setForm(f => ({...f, comment: e.target.value}))} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", resize: "vertical" }} />
                 </div>
-                <button style={{ background: "#8b1a1a", color: "white", border: "none", padding: "18px", fontFamily: "'Unbounded', sans-serif", fontSize: "14px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", cursor: "pointer", width: "100%" }}>
-                  ОТПРАВИТЬ ЗАЯВКУ →
+                <button onClick={handleSubmit} disabled={sending} style={{ background: sending ? "#aaa" : "#8b1a1a", color: "white", border: "none", padding: "18px", fontFamily: "'Unbounded', sans-serif", fontSize: "14px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", cursor: sending ? "default" : "pointer", width: "100%" }}>
+                  {sending ? "ОТПРАВЛЯЕМ..." : "ОТПРАВИТЬ ЗАЯВКУ →"}
                 </button>
                 <p style={{ fontSize: "12px", color: "#aaa", textAlign: "center", marginTop: "-8px" }}>Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
               </div>
+              )}
             </div>
           </div>
         </section>
