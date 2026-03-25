@@ -93,7 +93,7 @@ const vacancies = [
     salary: "60 000",
     desc: "Координация работы кафе, встреча гостей, работа с кассой и бронированием.",
     schedule: "5 дней в неделю",
-    requirements: "Опыт в сфере обслуживания от 1 года",
+    requirements: "Доброжелательность, внимательность",
   },
   {
     icon: "🌱",
@@ -296,51 +296,139 @@ export default function Index() {
           </div>
         </section>
 
-        {/* ИНСТАГРАМ */}
-        <section className="section-padding" style={{ borderTop: "3px solid #1a1a1a" }}>
-          <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
-            @NABEREZHNAYA.DOBRA
-          </h2>
-          <div className="social-grid">
-            <div className="social-item">
-              <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Домашняя еда" />
+        {/* О НАС */}
+        <section className="section-padding" id="about" style={{ borderTop: "3px solid #1a1a1a" }}>
+          <h2 className="section-title" style={{ marginBottom: "40px" }}>О НАС</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", border: "3px solid #1a1a1a" }}>
+            {[
+              { icon: "☕", title: "КТО МЫ", text: "«Набережная добра» — социальное кафе во Владивостоке с домашней кухней и собственной пекарней. Мы готовим обеды (супы, вторые блюда, салаты), печём круассаны, пирожки, булочки с корицей, блины и варим качественный кофе." },
+              { icon: "❤️", title: "НАША МИССИЯ", text: "Дать первый рабочий опыт тем, кому сложно начать. Мы трудоустраиваем выпускников детских домов, людей с инвалидностью и подростков 14–18 лет. В Приморском крае сотни людей не могут найти работу из-за отсутствия опыта — мы ломаем этот замкнутый круг." },
+              { icon: "🎓", title: "КАК ЭТО РАБОТАЕТ", text: "Каждый стажёр закреплён за наставником — опытным пекарем, поваром или администратором. Обучение проходит в реальном процессе: выпечка, приготовление блюд, работа с кассой, обслуживание гостей. После — запись в трудовой книжке." },
+              { icon: "⭐", title: "ПОЧЕМУ ВЫБИРАЮТ НАС", text: "Мы — единственное кафе во Владивостоке, которое совмещает домашнюю кухню, пекарню, кофе и системное трудоустройство трёх уязвимых групп. Приходя к нам, вы не просто обедаете — вы становитесь частью доброго дела." },
+            ].map((card, i) => (
+              <div key={card.title} style={{
+                padding: "32px",
+                borderRight: i % 2 === 0 ? "3px solid #1a1a1a" : "none",
+                borderBottom: i < 2 ? "3px solid #1a1a1a" : "none",
+              }}>
+                <div style={{ fontSize: "36px", marginBottom: "16px" }}>{card.icon}</div>
+                <div style={{ fontWeight: 800, fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "12px" }}>{card.title}</div>
+                <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#444" }}>{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ФОРМА ЗАЯВКИ */}
+        <section className="section-padding" id="stazheram" style={{ borderTop: "3px solid #1a1a1a", background: "#f5f0e8" }}>
+          <h2 className="section-title" style={{ marginBottom: "40px" }}>ОТКЛИКНУТЬСЯ</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "start" }}>
+            <div>
+              <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#444", marginBottom: "28px" }}>
+                Заполните форму — и мы свяжемся с вами, чтобы обсудить подходящую вакансию и график. Опыт не нужен: мы обучаем с нуля.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "32px" }}>
+                {[
+                  { icon: "🧡", text: "Официальное трудоустройство по ТК РФ" },
+                  { icon: "🎓", text: "Обучение с наставником — бесплатно" },
+                  { icon: "📋", text: "Запись в трудовой книжке" },
+                  { icon: "💛", text: "Гибкий график для особых категорий" },
+                ].map((item) => (
+                  <div key={item.text} style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "15px", color: "#333" }}>
+                    <span style={{ fontSize: "20px" }}>{item.icon}</span>
+                    <span>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <p style={{ fontSize: "14px", color: "#888", marginBottom: "8px" }}>Или позвоните нам:</p>
+              <a href="tel:+79940183543" style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "22px", fontWeight: 800, color: "#1a1a1a", textDecoration: "none" }}>
+                +7 994 018-35-43
+              </a>
             </div>
-            <div className="social-item">
-              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Кофе" />
-            </div>
-            <div className="social-item">
-              <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Выпечка" />
-            </div>
-            <div className="social-item">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Атмосфера кафе" />
+
+            <div style={{ background: "white", border: "3px solid #1a1a1a", padding: "32px", boxShadow: "6px 6px 0 #1a1a1a" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div>
+                  <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>ВАШЕ ИМЯ *</label>
+                  <input type="text" placeholder="Иван Иванов" style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>НОМЕР ТЕЛЕФОНА *</label>
+                  <input type="tel" placeholder="+7 ___ ___-__-__" style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit" }} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>ЖЕЛАЕМАЯ ВАКАНСИЯ *</label>
+                  <select style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
+                    <option value="">Выберите вакансию...</option>
+                    <option>Пекарь</option>
+                    <option>Повар</option>
+                    <option>Официант</option>
+                    <option>Администратор</option>
+                    <option>Стажёр (оплачиваемая стажировка)</option>
+                    <option>Уборщик</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>КАТЕГОРИЯ (НЕОБЯЗАТЕЛЬНО)</label>
+                  <select style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", cursor: "pointer" }}>
+                    <option value="">Выберите категорию...</option>
+                    <option>Подросток 14–18 лет</option>
+                    <option>Выпускник детского дома</option>
+                    <option>Человек с ОВЗ</option>
+                    <option>Другое</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>КОММЕНТАРИЙ (НЕОБЯЗАТЕЛЬНО)</label>
+                  <textarea placeholder="Расскажите о себе, удобном графике или пожеланиях..." rows={4} style={{ width: "100%", padding: "14px 16px", border: "2px solid #1a1a1a", fontSize: "15px", background: "#fdf9f0", outline: "none", fontFamily: "inherit", resize: "vertical" }} />
+                </div>
+                <button style={{ background: "#8b1a1a", color: "white", border: "none", padding: "18px", fontFamily: "'Unbounded', sans-serif", fontSize: "14px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", cursor: "pointer", width: "100%" }}>
+                  ОТПРАВИТЬ ЗАЯВКУ →
+                </button>
+                <p style={{ fontSize: "12px", color: "#aaa", textAlign: "center", marginTop: "-8px" }}>Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+              </div>
             </div>
           </div>
         </section>
+
+        {/* ВЫ ЕДИТЕ — ОНИ РАСТУТ */}
+        <section style={{ background: "#1a1a1a", padding: "40px 50px", borderTop: "3px solid #1a1a1a" }}>
+          <div style={{ fontFamily: "'Unbounded', sans-serif", fontSize: "24px", fontWeight: 800, color: "white", lineHeight: 1.3, marginBottom: "16px" }}>
+            ВЫ ЕДИТЕ —<br />
+            <span style={{ color: "#f5c518" }}>ОНИ РАСТУТ.</span>
+          </div>
+          <p style={{ color: "#aaa", fontSize: "15px", lineHeight: 1.7, maxWidth: "500px" }}>
+            Каждый ваш визит — это вклад в чью-то первую запись в трудовой.<br />
+            Без пожертвований и фондов. Просто приходите обедать.
+          </p>
+        </section>
       </main>
 
-      <footer>
+      <footer id="contacts">
         <div>
           <div className="footer-logo">НАБЕРЕЖНАЯ ДОБРА</div>
-          <p style={{ color: "#666", lineHeight: 1.6 }}>
-            Социальное кафе с домашней кухней и собственной пекарней. Владивосток, ул. Светланская. Каждый обед — это вклад в чью-то судьбу.
+          <p style={{ color: "#666", lineHeight: 1.6, marginBottom: "24px" }}>
+            Социальное кафе с домашней кухней и своей пекарней. Владивосток. Где каждый обед — это чей-то первый шаг.
           </p>
+          <p style={{ color: "#8b1a1a", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>КОНТАКТЫ</p>
+          <a href="tel:+79940183543" style={{ display: "block", color: "#1a1a1a", textDecoration: "none", fontWeight: 700, fontSize: "16px", marginBottom: "6px" }}>+7 994 018-35-43</a>
+          <a href="#" style={{ display: "block", color: "#8b1a1a", textDecoration: "none", fontSize: "15px", marginBottom: "4px" }}>ул. Пушкинская, 34 →</a>
+          <span style={{ color: "#666", fontSize: "14px" }}>Владивосток</span>
         </div>
         <div className="footer-links">
-          <h4>Навигация</h4>
+          <h4 style={{ color: "#8b1a1a" }}>НАВИГАЦИЯ</h4>
           <ul>
             <li><a href="#menu" style={{ color: "inherit", textDecoration: "none" }}>Меню</a></li>
+            <li><a href="#about" style={{ color: "inherit", textDecoration: "none" }}>О нас</a></li>
             <li><a href="#vacancies" style={{ color: "inherit", textDecoration: "none" }}>Вакансии</a></li>
-            <li><a href="#stazheram" style={{ color: "inherit", textDecoration: "none" }}>Стажёрам</a></li>
-            <li><a href="#contacts" style={{ color: "inherit", textDecoration: "none" }}>Контакты</a></li>
+            <li><a href="#stazheram" style={{ color: "inherit", textDecoration: "none" }}>Откликнуться</a></li>
           </ul>
         </div>
         <div className="footer-links">
-          <h4>Часы работы</h4>
+          <h4 style={{ color: "#8b1a1a" }}>ЧАСЫ РАБОТЫ</h4>
           <ul>
-            <li>Пн–Пт: 08:00 – 20:00</li>
-            <li>Суб: 09:00 – 18:00</li>
-            <li>Вс: 10:00 – 17:00</li>
-            <li>Обед: 11:00–15:00</li>
+            <li>Ежедневно: 08:00 – 20:00</li>
+            <li>Обед: 11:00 – 15:00</li>
           </ul>
         </div>
         <div className="footer-bottom">
